@@ -1,13 +1,10 @@
 package com.digital.rehab.service;
 
-
-import java.util.Optional;
+import java.util.UUID;
 
 import com.digital.rehab.entity.User;
 
 public interface UserService {
 	
-	Long saveUser(User user);
-	User getUserById(Long id);
-	Optional<User>findByUsername(String username);
+	UUID saveUser(User user);
 }

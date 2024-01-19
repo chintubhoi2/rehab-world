@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
@@ -37,7 +39,9 @@ public class JwtUtil {
 	public Claims getClaims(String token) {
 		
 		return Jwts
-				.parser()
+				.parserBuilder()
+				.setSigningKey(getSignKey())
+				.build()
 				.parseClaimsJws(token)
 				.getBody();
 	}
@@ -46,16 +50,15 @@ public class JwtUtil {
 		
 		
 		return Jwts.builder()
-				.setClaims(null)
 				.setSubject(subject)
 				.setIssuer("ved")
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis()+TimeUnit.MINUTES.toMillis(15)))
-				.signWith(SignatureAlgorithm.HS256,secret)
+				.signWith(getSignKey(),SignatureAlgorithm.HS256)
 				.compact();
 	}
-	/*
-	 * private java.security.Key getSignKey() { byte[] keyBytes =
-	 * Decoders.BASE64.decode(secret); return Keys.hmacShaKeyFor(keyBytes); }
-	 */
+	private java.security.Key getSignKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 }
