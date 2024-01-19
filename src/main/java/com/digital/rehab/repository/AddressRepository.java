@@ -1,11 +1,10 @@
-package com.digital.rehab.repository;
 
-import java.util.UUID;
+package com.digital.rehab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.digital.rehab.entity.Address;
 
-public interface AddressRepository extends JpaRepository<Address, UUID>{
+public interface AddressRepository extends JpaRepository<Address, Long> {
 
 }
