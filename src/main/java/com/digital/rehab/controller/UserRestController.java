@@ -40,6 +40,7 @@ public class UserRestController {
 		
 		String userName = userService.saveUser(user);
 		String msg = "userName is : " + userName;
+	
 		UserDtoResponse response = new UserDtoResponse();
 		response.setMessage(msg);
 		response.setStaus("OK");
@@ -67,9 +68,8 @@ public class UserRestController {
 		UserResponse response = userService.getUserById(user_id);
 		
 		return ResponseEntity.ok(response);
+
 	}
-	
-	
 	@GetMapping("/status")
 	public ResponseEntity<?> status(){
 		
@@ -80,5 +80,6 @@ public class UserRestController {
 		
 		return ResponseEntity.ok("Application is running");
 	}
+	
 	
 }

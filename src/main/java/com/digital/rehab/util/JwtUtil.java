@@ -47,7 +47,7 @@ public class JwtUtil {
 
 		return Jwts.builder().setClaims(null).setSubject(subject).setIssuer("ved")
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(1500)))
+				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(15)))
 				.signWith(SignatureAlgorithm.HS256, secret.getBytes()).compact();
 	}
 	/*
