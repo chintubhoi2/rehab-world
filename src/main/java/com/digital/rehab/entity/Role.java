@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -30,6 +32,7 @@ public class Role {
 	private Long id;
 	private String role; 
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy = "roles",cascade = {CascadeType.ALL,CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	private List<User> users = new ArrayList<>();
 }

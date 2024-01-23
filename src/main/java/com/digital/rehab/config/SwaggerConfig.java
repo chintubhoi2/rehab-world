@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
 				.select()
 
-				.apis(RequestHandlerSelectors.basePackage("com.digital.rehab"))
+				.apis(RequestHandlerSelectors.basePackage("com.digital.rehab.controller"))
 
 				.paths(regex("/user.*"))
 

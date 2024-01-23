@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -46,7 +48,8 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.ALL,CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	private List<Address>addresses = new ArrayList<>();
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Role> roles = new ArrayList<>();
 	  
 	

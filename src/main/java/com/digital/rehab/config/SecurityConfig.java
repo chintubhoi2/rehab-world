@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.digital.rehab.filter.SecurityFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private InvalidUserEntryPoint authenticationEntryPoint;
+	
+	@Autowired
+	private SecurityFilter securityFilter;
 	
 	@Override
 	@Bean
@@ -57,13 +63,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 http
 		 .csrf().disable()
 		 .authorizeRequests()
-		 .antMatchers("/user/saveuser","user/login").permitAll()
+		 .antMatchers("/user/saveuser","/user/login").permitAll()
+		 .antMatchers("/user/status").hasRole("ADMIN")
 		 .anyRequest().authenticated()
 		 .and() 
 		 .exceptionHandling()
 		 .authenticationEntryPoint(authenticationEntryPoint)
 		 .and()
 		 .sessionManagement()
-		 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		 .and()
+		 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }
