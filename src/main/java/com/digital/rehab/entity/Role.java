@@ -35,4 +35,8 @@ public class Role {
 	@JsonBackReference
 	@ManyToMany(mappedBy = "roles",cascade = {CascadeType.ALL,CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	private List<User> users = new ArrayList<>();
+	
+	@JsonBackReference
+	@ManyToMany(mappedBy = "roles",cascade = {CascadeType.ALL,CascadeType.REMOVE}, fetch = FetchType.LAZY)
+	private List<User> doctors = new ArrayList<>();
 }

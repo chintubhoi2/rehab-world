@@ -38,6 +38,12 @@ public class Address {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
+    
+	/*
+	 * @ManyToOne(cascade = CascadeType.PERSIST)
+	 * 
+	 * @JoinColumn(name = "doctor_id") private Doctor docter;
+	 */
 
     // getters, setters, and constructors
 

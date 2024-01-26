@@ -12,4 +12,4 @@ public class RehabWorldApplication {
 		SpringApplication.run(RehabWorldApplication.class, args);
 	}
 
-}
+} 
